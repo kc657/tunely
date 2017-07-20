@@ -40,10 +40,25 @@ $(document).ready(function () {
   console.log('app.js loaded!')
   $('.new-album-form').on('submit', function (e) {
     e.preventDefault();
+    const formData = $(this).serialize();
+    
     $('.artist-name-input').val('');
     $('.album-name-input').val('');
     $('.release-date-input').val('');
-    $(this).serialize();
+
+    $.ajax({
+      method: "POST",
+      url: "/api/albums",
+      data: formData,
+      success: function (album) {
+        console.log('successfully posted!');
+        console.log('we got back', album);
+        renderAlbum(album);
+      },
+      error: function () {
+        console.log('posting failed');
+      }
+    })
   })
   $.ajax({
     method: "GET",
