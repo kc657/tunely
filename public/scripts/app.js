@@ -38,7 +38,9 @@ sampleAlbums.push({
 
 $(document).ready(function () {
   console.log('app.js loaded!')
-  $('.add-album-modal').modal('show');
+  $('.new-album-btn').on('click', function (e) {
+    $('.add-album-modal').modal('show');
+  })
   $('.new-album-form').on('submit', function (e) {
     e.preventDefault();
     const formData = $(this).serialize();
