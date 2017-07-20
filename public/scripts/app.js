@@ -39,47 +39,52 @@ sampleAlbums.push({
 $(document).ready(function () {
   console.log('app.js loaded!')
   $('.new-album-btn').on('click', function (e) {
-    $('.add-album-modal').modal('show');
+    $('.add-album-modal').modal('show')
   })
   $('.new-album-form').on('submit', function (e) {
-    e.preventDefault();
-    const formData = $(this).serialize();
-    
-    $('.artist-name-input').val('');
-    $('.album-name-input').val('');
-    $('.release-date-input').val('');
+    e.preventDefault()
+    const formData = $(this).serialize()
+
+    $('.artist-name-input').val('')
+    $('.album-name-input').val('')
+    $('.release-date-input').val('')
 
     $.ajax({
-      method: "POST",
-      url: "/api/albums",
+      method: 'POST',
+      url: '/api/albums',
       data: formData,
       success: function (album) {
-        console.log('successfully posted!');
-        console.log('we got back', album);
-        renderAlbum(album);
+        console.log('successfully posted!')
+        console.log('we got back', album)
+        renderAlbum(album)
       },
       error: function () {
-        console.log('posting failed');
+        console.log('posting failed')
       }
     })
 
-    $('.add-album-modal').modal('hide');
+    $('.add-album-modal').modal('hide')
   })
   $.ajax({
-    method: "GET",
-    url: "/api/albums",
+    method: 'GET',
+    url: '/api/albums',
     success: function (albums) {
-      albums.forEach(renderAlbum);
+      albums.forEach(renderAlbum)
     },
     error: function (err) {
-      throw err;
+      throw err
     }
   })
 })
 
 // this function takes a single album and renders it to the page
 function renderAlbum (album) {
-  var albumHtml = (`
+  let songString = ''
+  album.songs.forEach(function (song, i) {
+    let trackNumber = i + 1
+    songString = `${songString} - ${trackNumber} - ${song}`
+  })
+  let albumHtml = (`
     <div class="row album" data-album-id='${album.id}'>
     <div class="col-md-10 col-md-offset-1">
       <div class="panel panel-default">
@@ -108,6 +113,10 @@ function renderAlbum (album) {
                   <h4 class='inline-header'>Released date:</h4>
                   <span class='album-releaseDate'>${album.releaseDate}</span>
                 </li>
+                <li class="list-group-item">
+                  <h4 class="inline-header">Songs:</h4>
+                  <span> ${songString}</span>
+                </li>
               </ul>
             </div>
 
@@ -121,6 +130,6 @@ function renderAlbum (album) {
       </div>
     </div>
   </div>
-  `);
+  `)
   $('#albums').prepend(albumHtml)
 }
