@@ -1,8 +1,6 @@
 let express = require('express'),
   app = express();
-
 let controllers = require('./controllers')
-
 let db = require('./models');
 
 app.use(express.static('public'));
@@ -12,5 +10,7 @@ app.get('/',function homepage(req,res){
 });
 
 app.get('/api', controllers.api.index)
+
+app.get('/api/albums', controllers.albums.index)
 
 app.listen(process.env.PORT || 3000);
