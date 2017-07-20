@@ -38,6 +38,7 @@ sampleAlbums.push({
 
 $(document).ready(function () {
   console.log('app.js loaded!')
+  $('.add-album-modal').modal('show');
   $('.new-album-form').on('submit', function (e) {
     e.preventDefault();
     const formData = $(this).serialize();
@@ -59,6 +60,8 @@ $(document).ready(function () {
         console.log('posting failed');
       }
     })
+
+    $('.add-album-modal').modal('hide');
   })
   $.ajax({
     method: "GET",

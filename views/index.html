@@ -25,25 +25,32 @@
       </div>
     </div>
 
-    <section class="container">
-      <div class="row">
-        <form class="form-horizontal new-album-form">
-          <div class="input-group">
-            <span class="input-group-addon">Album Name</span>
-            <input class="form-control album-name-input" name="name" type="text"></input>
+    <div class="modal fade add-album-modal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Add a new album</h4>
           </div>
-          <div class="input-group">
-            <span class="input-group-addon">Artist Name</span>
-            <input class="form-control artist-name-input" name="artistName" type="text"></input>
+          <div class="modal-body">
+            <form class="form-horizontal new-album-form">
+              <div class="input-group">
+                <span class="input-group-addon">Album Name</span>
+                <input class="form-control album-name-input" name="name" type="text" required></input>
+              </div>
+              <div class="input-group">
+                <span class="input-group-addon">Artist Name</span>
+                <input class="form-control artist-name-input" name="artistName" type="text" required></input>
+              </div>
+              <div class="input-group">
+                <span class="input-group-addon">Release Date</span>
+                <input class="form-control release-date-input" name="releaseDate" type="text" required></input>
+              </div>
+              <input type="submit" class="btn btn-primary"></input>
+            </form>
           </div>
-          <div class="input-group">
-            <span class="input-group-addon">Release Date</span>
-            <input class="form-control release-date-input" name="releaseDate" type="text"></input>
-          </div>
-          <input type="submit" class="btn btn-primary"></input>
-        </form>
+        </div>
       </div>
-    </section>
+    </div>
 
     <section class="container">
       <div class="row">
