@@ -6,6 +6,7 @@
  */
 
 /* hard-coded data! */
+/*
 var sampleAlbums = []
 sampleAlbums.push({
   artistName: 'Ladyhawke',
@@ -31,13 +32,49 @@ sampleAlbums.push({
   releaseDate: '2008, September 12',
   genres: [ 'piano' ]
 })
-
+*/
 
 /* end of hard-coded data */
 
 $(document).ready(function () {
   console.log('app.js loaded!')
-  sampleAlbums.forEach(renderAlbum)
+  $('.new-album-btn').on('click', function (e) {
+    $('.add-album-modal').modal('show');
+  })
+  $('.new-album-form').on('submit', function (e) {
+    e.preventDefault();
+    const formData = $(this).serialize();
+    
+    $('.artist-name-input').val('');
+    $('.album-name-input').val('');
+    $('.release-date-input').val('');
+
+    $.ajax({
+      method: "POST",
+      url: "/api/albums",
+      data: formData,
+      success: function (album) {
+        console.log('successfully posted!');
+        console.log('we got back', album);
+        renderAlbum(album);
+      },
+      error: function () {
+        console.log('posting failed');
+      }
+    })
+
+    $('.add-album-modal').modal('hide');
+  })
+  $.ajax({
+    method: "GET",
+    url: "/api/albums",
+    success: function (albums) {
+      albums.forEach(renderAlbum);
+    },
+    error: function (err) {
+      throw err;
+    }
+  })
 })
 
 // this function takes a single album and renders it to the page
@@ -85,6 +122,5 @@ function renderAlbum (album) {
     </div>
   </div>
   `);
-  console.log('rendering album:', album);
   $('#albums').prepend(albumHtml)
 }
