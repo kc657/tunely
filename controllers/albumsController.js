@@ -1,5 +1,10 @@
+const db = require('../models');
+
 function index (req, res) {
-  res.json(albums)
+  db.Album.find({}, function (err, albums) {
+    if (err) return res.status(500).json(err);
+    res.json(albums)
+  })
 }
 
 module.exports = {

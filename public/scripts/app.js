@@ -6,6 +6,7 @@
  */
 
 /* hard-coded data! */
+/*
 var sampleAlbums = []
 sampleAlbums.push({
   artistName: 'Ladyhawke',
@@ -31,13 +32,22 @@ sampleAlbums.push({
   releaseDate: '2008, September 12',
   genres: [ 'piano' ]
 })
-
+*/
 
 /* end of hard-coded data */
 
 $(document).ready(function () {
   console.log('app.js loaded!')
-  sampleAlbums.forEach(renderAlbum)
+  $.ajax({
+    method: "GET",
+    url: "/api/albums",
+    success: function (albums) {
+      albums.forEach(renderAlbum);
+    },
+    error: function (err) {
+      throw err;
+    }
+  })
 })
 
 // this function takes a single album and renders it to the page
