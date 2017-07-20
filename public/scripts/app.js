@@ -82,7 +82,7 @@ function renderAlbum (album) {
   let songString = ''
   album.songs.forEach(function (song, i) {
     let trackNumber = i + 1
-    songString = `${songString} - ${trackNumber} - ${song}`
+    songString = `${songString} - ${trackNumber} - ${song.name}`
   })
   let albumHtml = (`
     <div class="row album" data-album-id='${album.id}'>
