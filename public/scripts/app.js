@@ -38,6 +38,13 @@ sampleAlbums.push({
 
 $(document).ready(function () {
   console.log('app.js loaded!')
+  $('.new-album-form').on('submit', function (e) {
+    e.preventDefault();
+    $('.artist-name-input').val('');
+    $('.album-name-input').val('');
+    $('.release-date-input').val('');
+    $(this).serialize();
+  })
   $.ajax({
     method: "GET",
     url: "/api/albums",
@@ -95,6 +102,5 @@ function renderAlbum (album) {
     </div>
   </div>
   `);
-  console.log('rendering album:', album);
   $('#albums').prepend(albumHtml)
 }
