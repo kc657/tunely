@@ -19,7 +19,7 @@ function create (req, res) {
 function show (req, res) {
   // find one album by id and send it back as JSON
   db.Album.findById(req.params.albumId, function (err, foundAlbum) {
-    if (err) { console.log('albumsController.show error', err) }
+    if (err) {console.log("Cannot find the album");}
     res.json(foundAlbum)
   })
 }
