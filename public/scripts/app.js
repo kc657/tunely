@@ -56,8 +56,8 @@ $(document).ready(function () {
       name: $songName.val(),
       trackNumber: $trackNumber.val()
     }
-    let id = $('#songModal').data('album-id')
-    let songPostingUrl = `/api/albums/${id}/songs`
+    let albumId = $('#songModal').data('album-id')
+    let songPostingUrl = `/api/albums/${albumId}/songs`
 
     $.post(songPostingUrl, songToSubmit, function (song) {
       console.log('receiving ', song)
@@ -66,7 +66,12 @@ $(document).ready(function () {
 
       $modal.modal('hide')
 
-      
+    //   $.get('/api/albums/' + id, function (data) {
+    //  // remove the current instance of the album from the page
+    //     $('[data-album-id=' + id + ']').remove()
+    //  // re-render it with the new album data (including songs)
+    //     renderAlbum(data)
+    //   })
     })
   })
 })
