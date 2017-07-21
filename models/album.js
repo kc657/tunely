@@ -7,7 +7,8 @@ let AlbumSchema = new Schema({
   name: String,
   releaseDate: String,
   genres: [String],
-  songs: [Song.schema]
+  songs: [Song.schema],
+  trackNumber: Number
 })
 
 let Album = mongoose.model('Album', AlbumSchema)
