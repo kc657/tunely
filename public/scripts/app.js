@@ -1,46 +1,10 @@
-/* CLIENT-SIDE JS
- *
- * You may edit this file as you see fit.  Try to separate different components
- * into functions and objects as needed.
- *
- */
-
-/* hard-coded data! */
-/*
-var sampleAlbums = []
-sampleAlbums.push({
-  artistName: 'Ladyhawke',
-  name: 'Ladyhawke',
-  releaseDate: '2008, November 18',
-  genres: [ 'new wave', 'indie rock', 'synth pop' ]
-})
-sampleAlbums.push({
-  artistName: 'The Knife',
-  name: 'Silent Shout',
-  releaseDate: '2006, February 17',
-  genres: [ 'synth pop', 'electronica', 'experimental' ]
-})
-sampleAlbums.push({
-  artistName: 'Juno Reactor',
-  name: 'Shango',
-  releaseDate: '2000, October 9',
-  genres: [ 'electronic', 'goa trance', 'tribal house' ]
-})
-sampleAlbums.push({
-  artistName: 'Philip Wesley',
-  name: 'Dark Night of the Soul',
-  releaseDate: '2008, September 12',
-  genres: [ 'piano' ]
-})
-*/
-
-/* end of hard-coded data */
-
 $(document).ready(function () {
   console.log('app.js loaded!')
+
   $('.new-album-btn').on('click', function (e) {
     $('.add-album-modal').modal('show')
   })
+
   $('.new-album-form').on('submit', function (e) {
     e.preventDefault()
     const formData = $(this).serialize()
@@ -74,6 +38,10 @@ $(document).ready(function () {
     error: function (err) {
       throw err
     }
+  })
+  $('#albums').on('click', '.add-song', function (e) {
+    let id = $(this).closest('.album').data('album-id');
+    console.log(id);
   })
 })
 
@@ -124,7 +92,7 @@ function renderAlbum (album) {
           <!-- end of album internal row -->
 
           <div class='panel-footer'>
-            <button class='btn btn-primary add-song'>Add Song</button>
+            <button type='button' class='btn btn-primary add-song'>Add Song</button>
           </div>
 
         </div>
