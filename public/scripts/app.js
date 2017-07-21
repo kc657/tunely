@@ -56,8 +56,18 @@ $(document).ready(function () {
       name: $songName.val(),
       trackNumber: $trackNumber.val()
     }
+    let id = $('#songModal').data('album-id')
+    let songPostingUrl = `/api/albums/${id}/songs`
 
-    console.log(songToSubmit);
+    $.post(songPostingUrl, songToSubmit, function (song) {
+      console.log('receiving ', song)
+      $songName.val('')
+      $trackNumber.val('')
+
+      $modal.modal('hide')
+
+      
+    })
   })
 })
 
