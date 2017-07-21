@@ -42,6 +42,8 @@ $(document).ready(function () {
   $('#albums').on('click', '.add-song', function (e) {
     let id = $(this).closest('.album').data('album-id');
     console.log(id);
+    $('#songModal').data('album-id', id)
+    $('#songModal').modal('show')
   })
 })
 
