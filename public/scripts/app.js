@@ -85,7 +85,7 @@ function renderAlbum (album) {
     songString = `${songString} - ${trackNumber} - ${song.name}`
   })
   let albumHtml = (`
-    <div class="row album" data-album-id='${album.id}'>
+    <div class="row album" data-album-id='${album._id}'>
     <div class="col-md-10 col-md-offset-1">
       <div class="panel panel-default">
         <div class="panel-body">
@@ -124,6 +124,7 @@ function renderAlbum (album) {
           <!-- end of album internal row -->
 
           <div class='panel-footer'>
+            <button class='btn btn-primary add-song'>Add Song</button>
           </div>
 
         </div>
