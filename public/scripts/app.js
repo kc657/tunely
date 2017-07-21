@@ -40,10 +40,24 @@ $(document).ready(function () {
     }
   })
   $('#albums').on('click', '.add-song', function (e) {
-    let id = $(this).closest('.album').data('album-id');
-    console.log(id);
+    let id = $(this).closest('.album').data('album-id')
+    console.log(id)
     $('#songModal').data('album-id', id)
     $('#songModal').modal('show')
+  })
+
+  $('#saveSong').on('click', function (e) {
+    e.preventDefault()
+    let $modal = $('#songModal')
+    let $songName = $modal.find('#songName')
+    let $trackNumber = $modal.find('#trackNumber')
+
+    let songToSubmit = {
+      name: $songName.val(),
+      trackNumber: $trackNumber.val()
+    }
+
+    console.log(songToSubmit);
   })
 })
 
