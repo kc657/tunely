@@ -83,6 +83,10 @@ $(document).ready(function () {
     })
     $('#songModal').modal('hide');
   })
+
+  $('#albums').on('click', '.delete-song', function (e) {
+    e.preventDefault
+  })
 })
 
 // this function takes a single album and renders it to the page
@@ -133,6 +137,7 @@ function renderAlbum (album) {
 
           <div class='panel-footer'>
             <button type='button' class='btn btn-primary add-song'>Add Song</button>
+            <button type='button' class='btn btn-primary delete-song'>Delete Song</button>
           </div>
 
         </div>
