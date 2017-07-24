@@ -49,16 +49,16 @@ $(document).ready(function () {
   $('#saveSong').on('click', function (e) {
     e.preventDefault()
 
-    const album_id = $('#songModal').data('album-id')
+    const albumId = $('#songModal').data('album-id')
     const trackNumber = $('#trackNumber').val()
     const songName = $('#songName').val()
-    console.log(album_id)
+    console.log(albumId)
     console.log(trackNumber)
     console.log(songName)
 
     $.ajax({
       method: 'POST',
-      url: '/api/albums/' + album_id + '/songs',
+      url: '/api/albums/' + albumId + '/songs',
       data: {
         trackNumber: trackNumber,
         name: songName
@@ -67,7 +67,7 @@ $(document).ready(function () {
         console.log('Post succeeded!', song)
         $.ajax({
           method: 'GET',
-          url: '/api/albums/' + album_id,
+          url: '/api/albums/' + albumId,
           success: function (album) {
             console.log('Here\'s the album we found!', album)
           // render new album
@@ -86,6 +86,11 @@ $(document).ready(function () {
 
   $('#albums').on('click', '.delete-song', function (e) {
     e.preventDefault
+    const albumId = $('#songModal').data('album-id')
+    $.ajax({
+      method: 'DELETE',
+      url: '/api/albums/' + albumId
+    })
   })
 })
 
@@ -137,7 +142,7 @@ function renderAlbum (album) {
 
           <div class='panel-footer'>
             <button type='button' class='btn btn-primary add-song'>Add Song</button>
-            <button type='button' class='btn btn-primary delete-song'>Delete Song</button>
+            <button type='button' class='btn btn-primary delete-song'>Delete Album</button>
           </div>
 
         </div>
