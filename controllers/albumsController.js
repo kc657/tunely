@@ -24,12 +24,6 @@ function show (req, res) {
   })
 }
 
-function showSong (req, res) {
-  db.Song.find({}, function (err, song) {
-    if (err) return res.status(500).json(err)
-    res.json(song)
-  })
-}
 
 // DELETE /api/albums/:albumId
 function destroy (req, res) {
@@ -45,8 +39,7 @@ function update (req, res) {
 module.exports = {
   index: index,
   create: create,
-  show: show,
-  showSong: showSong
+  show: show
 //  destroy: destroy,
 //  update: update
 }

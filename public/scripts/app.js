@@ -48,31 +48,40 @@ $(document).ready(function () {
 
   $('#saveSong').on('click', function (e) {
     e.preventDefault()
-    let $modal = $('#songModal')
-    let $songName = $modal.find('#songName')
-    let $trackNumber = $modal.find('#trackNumber')
 
-    let songToSubmit = {
-      name: $songName.val(),
-      trackNumber: $trackNumber.val()
-    }
-    let albumId = $('#songModal').data('album-id')
-    let songPostingUrl = `/api/albums/${albumId}/songs`
+    const album_id = $('#songModal').data('album-id')
+    const trackNumber = $('#trackNumber').val()
+    const songName = $('#songName').val()
+    console.log(album_id)
+    console.log(trackNumber)
+    console.log(songName)
 
-    $.post(songPostingUrl, songToSubmit, function (song) {
-      console.log('receiving ', song)
-      $songName.val('')
-      $trackNumber.val('')
-
-      $modal.modal('hide')
-
-    //   $.get('/api/albums/' + id, function (data) {
-    //  // remove the current instance of the album from the page
-    //     $('[data-album-id=' + id + ']').remove()
-    //  // re-render it with the new album data (including songs)
-    //     renderAlbum(data)
-    //   })
+    $.ajax({
+      method: 'POST',
+      url: '/api/albums/' + album_id + '/songs',
+      data: {
+        trackNumber: trackNumber,
+        name: songName
+      },
+      success: function (song) {
+        console.log('Post succeeded!', song)
+        $.ajax({
+          method: 'GET',
+          url: '/api/albums/' + album_id,
+          success: function (album) {
+            console.log('Here\'s the album we found!', album)
+          // render new album
+          },
+          error: function (e) {
+            console.log('GET failed!')
+          }
+        })
+      },
+      error: function (e) {
+        console.log('post failed!', e)
+      }
     })
+    $('#songModal').modal('hide');
   })
 })
 
@@ -81,7 +90,7 @@ function renderAlbum (album) {
   let songString = ''
   album.songs.forEach(function (song, i) {
     let trackNumber = i + 1
-    songString = `${songString} - ${trackNumber} - ${song.name}`
+    songString = `${songString} - ${song. trackNumber} - ${song.name}`
   })
   let albumHtml = (`
     <div class="row album" data-album-id='${album._id}'>
